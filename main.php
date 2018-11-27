@@ -1,11 +1,13 @@
 <?php
 echo "\nTest script started .........\n".
 
-include "config/main.php";
-include "validation/main.php";
-include "file_reader/main.php";
-include "curl/main.php";
-include "report_genrator/main.php";
+include "config/config.php";
+include "validation/Validation.php";
+include "file_reader/FileReader.php";
+include "functions/Functions.php";
+include "execute.php";
+$response =run_script();
+print_r($response);
 
 echo "\nTest script finished ........... \n";
 ?>
