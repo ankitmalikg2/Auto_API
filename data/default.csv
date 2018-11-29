@@ -1,1 +1,7 @@
-
+Serial_Number,TestName,BaseURL,RelativeURL,Method(GET/POST),Input,Output,ConnectionTimeout(ms),TotalTimeout(ms),is_x-www-form-urlencoded(Yes/No)
+1,first test,http://mapi.indiamart.com/,wservce/users/forgotpassword/,GET,"email:9653330248
+modid:IMOB
+token:imobile@15061981
+country_iso:IN
+unique_id:5b6b36a57c5e0
+//email_mob:9457643352",abc,1000,5000,Yes
