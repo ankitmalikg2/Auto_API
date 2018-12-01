@@ -3,7 +3,7 @@
 class Validation {
 
     public static function method_validation($value) {
-        $value = strtoupper($value);
+        //$value = strtoupper($value);
         if ($value == "GET" || $value == "POST") {
             return TRUE;
         }

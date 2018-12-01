@@ -7,7 +7,7 @@ class CurlFunction {
         $url = rtrim($url, '/') . "/?" . http_build_query($data);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         //timeout parameters
@@ -19,13 +19,12 @@ class CurlFunction {
         }
 
         $output = curl_exec($ch);
-        curl_close($ch);
 
         if (curl_errno($ch)) {
             return $this->curl_output_format(FALSE, curl_error($ch));
         }
-
-        return $this->curl_output_format(TRUE, $output);
+         curl_close($ch);        
+        return $this->curl_output_format(TRUE, json_decode($output,TRUE));
     }
 
     public function curl_post($url, $data, $con_timeout = '', $total_timeout = '', $is_x_www_form = False) {
@@ -33,7 +32,7 @@ class CurlFunction {
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_POST, count($data));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         //timeout
@@ -51,17 +50,18 @@ class CurlFunction {
 
         //executing request
         $output = curl_exec($ch);
-        curl_close($ch);
-
+        
         if (curl_errno($ch)) {
             return $this->curl_output_format(FALSE, curl_error($ch));
         }
-
-        return $this->curl_output_format(TRUE, $output);
+        
+        curl_close($ch);
+        
+        return $this->curl_output_format(TRUE, json_decode($output,TRUE));
     }
 
     public function curl_output_format($status, $response) {
-        return ["status" => $status, "response" => $response];
+        return [$status, $response];
     }
 
 }
